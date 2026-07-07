@@ -1,0 +1,31 @@
+/* Guli layout tokens — 4pt grid. No drop shadows; elevation = surface step + hairline + glow. */
+:root {
+  --space-1: 4px;
+  --space-2: 8px;
+  --space-3: 12px;   /* gap between cards */
+  --space-4: 16px;
+  --space-5: 20px;   /* screen margin, card padding */
+  --space-6: 24px;
+  --space-8: 32px;
+  --space-10: 40px;
+
+  --screen-margin: 20px;
+  --card-padding: 20px;
+  --card-gap: 12px;
+
+  --radius-sm: 10px;   /* chips, inputs */
+  --radius-md: 16px;   /* cards */
+  --radius-lg: 24px;   /* sheets, hero cards */
+  --radius-pill: 999px;
+
+  --tabbar-height: 56px;
+  --topbar-height: 52px;
+
+  --control-lg: 52px;  /* main CTAs, inputs */
+  --control-md: 44px;
+
+  /* motion */
+  --ease-standard: cubic-bezier(0.4, 0, 0.2, 1); /* @kind other */
+  --duration-transition: 240ms; /* @kind other */
+  --duration-reveal: 600ms; /* @kind other */
+}

@@ -1,0 +1,43 @@
+<!-- @dsCard group="Components" viewport="700x400" name="Cards" subtitle="InsightCard, ArchetypeCard, DailyQuestionCard" -->
+<!DOCTYPE html>
+<html lang="ka">
+<head>
+<meta charset="UTF-8">
+<link rel="stylesheet" href="../../styles.css">
+<script src="https://unpkg.com/react@18.3.1/umd/react.development.js" integrity="sha384-hD6/rw4ppMLGNu3tX5cjIb+uRZ7UkRJ6BPkLpg4hAu/6onKUg4lLsHAs9EBPT82L" crossorigin="anonymous"></script>
+<script src="https://unpkg.com/react-dom@18.3.1/umd/react-dom.development.js" integrity="sha384-u6aeetuaXnQ38mYT8rp6sbXaQe3NL9t+IBXmnYxwkUI2Hw4bsp2Wvmx4yRQF1uAm" crossorigin="anonymous"></script>
+<script src="https://unpkg.com/@babel/standalone@7.29.0/babel.min.js" integrity="sha384-m08KidiNqLdpJqLq95G/LEi8Qvjl/xUYll3QILypMoQ65QorJ9Lvtp2RXYGBFj1y" crossorigin="anonymous"></script>
+<script src="../../_ds_bundle.js"></script>
+<style>body { margin: 0; padding: 20px; }</style>
+</head>
+<body>
+<div id="root"></div>
+<script type="text/babel">
+const { InsightCard, ArchetypeCard, DailyQuestionCard, ScenarioSlider } = window.GuliDesignSystem_a2088d;
+function Demo() {
+  const [v, setV] = React.useState(40);
+  return (
+    <div style={{ display: 'flex', gap: 16, alignItems: 'flex-start' }}>
+      <div style={{ flex: 1.2, display: 'flex', flexDirection: 'column', gap: 12 }}>
+        <DailyQuestionCard question="გეგმა მირჩევნია იმპროვიზაციას." traits={['C', 'O']}>
+          <ScenarioSlider poleLeft="სრულიად არა" poleRight="სრულიად კი" value={v} onChange={setV} trait="C" />
+        </DailyQuestionCard>
+        <InsightCard title="შენი ენერგია" trait="E" label="კვლევითი საფუძველი">
+          ხალხთან ყოფნა გმუხტავს, მაგრამ დღეში ერთი მშვიდი საათი შენთვის აუცილებელია.
+        </InsightCard>
+        <DailyQuestionCard answered countdown="შემდეგი კითხვა ხვალ, 09:00" />
+      </div>
+      <ArchetypeCard
+        style={{ flex: 1 }}
+        name="მასპინძელი"
+        tagline="შენ ის ხარ, ვინც სუფრას ერთი კითხვით ცვლის."
+        traits={['E', 'A', 'O']}
+        chips={['გულღია', 'გულთბილი', 'მაძიებელი']}
+      />
+    </div>
+  );
+}
+ReactDOM.createRoot(document.getElementById('root')).render(<Demo />);
+</script>
+</body>
+</html>

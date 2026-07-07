@@ -1,0 +1,68 @@
+/* Guli color system — dark-first. "Saperavi" base world + "minankari" trait enamels. */
+:root {
+  /* base surfaces (dark = default) */
+  --bg-0: #120B10;            /* ღვინის ღამე — app background */
+  --bg-1: #1C1218;            /* cards, sheets */
+  --bg-2: #271A22;            /* elevated cards, inputs */
+  --line-hairline: rgba(255, 255, 255, 0.08);
+  --grabber: rgba(255, 255, 255, 0.16);
+
+  /* text */
+  --text-primary: #F5EDF1;
+  --text-secondary: #BCA9B4;
+  --text-muted: #8A7883;
+
+  /* brand core */
+  --saperavi: #A62A54;        /* primary actions, active states, links */
+  --saperavi-deep: #6E1B38;   /* pressed states, gradients */
+  --saperavi-tint: #E88BAB;   /* on-dark small text accents */
+
+  /* five trait colors — მინანქარი palette */
+  --trait-e: #F2A93B;         /* Extraversion — თაფლი (honey) */
+  --trait-a: #F0736A;         /* Agreeableness — ატამი (peach) */
+  --trait-c: #35C4B5;         /* Conscientiousness — მინანქარი (enamel) */
+  --trait-n: #9C7BF5;         /* Emotional range — ია (violet) */
+  --trait-o: #4FA3F7;         /* Openness — ცა (sky) */
+
+  /* semantic */
+  --success: var(--trait-c);
+  --warning: var(--trait-e);
+  --error: #FF5470;
+  --info: var(--trait-o);
+
+  /* semantic surface aliases */
+  --surface-app: var(--bg-0);
+  --surface-card: var(--bg-1);
+  --surface-elevated: var(--bg-2);
+  --text-body: var(--text-primary);
+  --action-primary: var(--saperavi);
+  --action-pressed: var(--saperavi-deep);
+  --link: var(--saperavi-tint);
+
+  /* active-element glow (the only "shadow" in the system) */
+  --glow-saperavi: 0 0 24px rgba(166, 42, 84, 0.12);
+  --glow-e: 0 0 24px rgba(242, 169, 59, 0.12);
+  --glow-a: 0 0 24px rgba(240, 115, 106, 0.12);
+  --glow-c: 0 0 24px rgba(53, 196, 181, 0.12);
+  --glow-n: 0 0 24px rgba(156, 123, 245, 0.12);
+  --glow-o: 0 0 24px rgba(79, 163, 247, 0.12);
+}
+
+/* Light theme (secondary; settings-optional). ეტრატი — parchment. */
+[data-theme="light"] {
+  --bg-0: #FAF5F2;
+  --bg-1: #FFFFFF;
+  --bg-2: #FFFFFF;
+  --line-hairline: rgba(36, 26, 32, 0.10);
+  --grabber: rgba(36, 26, 32, 0.18);
+  --text-primary: #241A20;
+  --text-secondary: #5E4E58;
+  --text-muted: #8A7883;
+  --saperavi: #8E2347;
+  --saperavi-tint: #8E2347;
+  --trait-e: #D18F27;
+  --trait-a: #D65A51;
+  --trait-c: #23A296;
+  --trait-n: #7E5DDA;
+  --trait-o: #2F86DB;
+}

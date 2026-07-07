@@ -1,0 +1,218 @@
+<!-- @dsCard group="Guli App" viewport="1080x880" name="Guli app — complete showcase" subtitle="All 22 spec screens, interactive, with screen navigator" -->
+<!DOCTYPE html>
+<html lang="ka">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>გული — UX/UI შოუქეისი</title>
+<link rel="stylesheet" href="tokens/fonts.css">
+<link rel="stylesheet" href="tokens/colors.css">
+<link rel="stylesheet" href="tokens/typography.css">
+<link rel="stylesheet" href="tokens/spacing.css">
+<link rel="stylesheet" href="styles.css">
+<script src="https://unpkg.com/react@18.3.1/umd/react.development.js" integrity="sha384-hD6/rw4ppMLGNu3tX5cjIb+uRZ7UkRJ6BPkLpg4hAu/6onKUg4lLsHAs9EBPT82L" crossorigin="anonymous"></script>
+<script src="https://unpkg.com/react-dom@18.3.1/umd/react-dom.development.js" integrity="sha384-u6aeetuaXnQ38mYT8rp6sbXaQe3NL9t+IBXmnYxwkUI2Hw4bsp2Wvmx4yRQF1uAm" crossorigin="anonymous"></script>
+<script src="https://unpkg.com/@babel/standalone@7.29.0/babel.min.js" integrity="sha384-m08KidiNqLdpJqLq95G/LEi8Qvjl/xUYll3QILypMoQ65QorJ9Lvtp2RXYGBFj1y" crossorigin="anonymous"></script>
+<script src="_ds_bundle.js"></script>
+<style>
+  html, body { height: 100%; }
+  body { margin: 0; background: #0A0609; overflow: hidden; }
+  #root { height: 100%; }
+  @media (prefers-reduced-motion: no-preference) {
+    .guli-splash-blob { animation: guli-splash-pulse 2.4s ease-in-out infinite; }
+  }
+  @keyframes guli-splash-pulse { 0%, 100% { transform: scale(0.92); opacity: 0.7; } 50% { transform: scale(1.02); opacity: 1; } }
+  @keyframes guli-pulse { 0%, 100% { opacity: 0.5; } 50% { opacity: 1; } }
+  .guli-reduced * { animation-duration: 1ms !important; transition-duration: 60ms !important; }
+  ::-webkit-scrollbar { width: 0; height: 0; }
+</style>
+</head>
+<body>
+<div id="root"></div>
+<script type="text/babel" src="tweaks-panel.jsx"></script>
+<script type="text/babel" src="shared.jsx"></script>
+<script type="text/babel" src="Onboarding.jsx"></script>
+<script type="text/babel" src="TodayMap.jsx"></script>
+<script type="text/babel" src="Assessment.jsx"></script>
+<script type="text/babel" src="Results.jsx"></script>
+<script type="text/babel" src="Circle.jsx"></script>
+<script type="text/babel" src="MeExtra.jsx"></script>
+<script type="text/babel">
+const { G, FRIENDS } = window.GuliKit;
+const { TabBar } = G;
+
+const NAV = [
+  { group: 'დაწყება', items: [
+    ['splash', 'Splash'], ['carousel', 'ღირებულებები ×3'], ['auth', 'ავტორიზაცია'],
+    ['name', 'სახელი'], ['birthday', 'დაბადება'], ['language', 'ენა'], ['consent', 'თანხმობა'],
+  ]},
+  { group: 'შეფასება', items: [
+    ['chapters', 'შენი წიგნი'], ['q-likert', 'კითხვა · ლიკერტი'], ['q-tt', 'კითხვა · არჩევანი'],
+    ['q-slider', 'კითხვა · სლაიდერი'], ['reveal', 'თავის გახსნა'],
+  ]},
+  { group: 'შედეგები', items: [
+    ['map', 'გულის რუკა'], ['trait', 'თვისების სიღრმე'], ['archetype', 'არქეტიპი'],
+    ['portrait', 'სრული პორტრეტი'], ['share', 'გაზიარება'],
+  ]},
+  { group: 'წრე', items: [
+    ['circle', 'წრის სია'], ['pair', 'თანხვედრა'], ['group', 'ჯგუფური რუკა'],
+  ]},
+  { group: 'ყოველდღე', items: [
+    ['today', 'დღეს'], ['me', 'მე'], ['settings', 'პარამეტრები'],
+  ]},
+];
+const FLAT = NAV.flatMap((g) => g.items.map((it) => it[0]));
+const TAB_OF = { today: 'today', map: 'map', circle: 'circle', me: 'me' };
+const LS_KEY = 'guli-showcase-route';
+
+const TWEAK_DEFAULTS = /*EDITMODE-BEGIN*/{
+  "theme": "dark",
+  "motion": "full"
+}/*EDITMODE-END*/;
+
+function Navigator({ route, go }) {
+  return (
+    <nav data-screen-label="Navigator" style={{
+      width: 216, flex: 'none', height: '100%', boxSizing: 'border-box',
+      borderRight: '1px solid rgba(255,255,255,0.06)', padding: '28px 8px 20px 20px',
+      display: 'flex', flexDirection: 'column', gap: 6, overflowY: 'auto', color: '#F5EDF1',
+    }}>
+      <div style={{ display: 'flex', flexDirection: 'column', gap: 2, marginBottom: 14, flex: 'none' }}>
+        <span style={{ font: '600 26px/1.2 var(--font-ui)' }}>გული</span>
+        <span style={{ font: '500 11px/16px var(--font-ui)', color: '#8A7883' }}>UX/UI შოუქეისი · 22 ეკრანი</span>
+      </div>
+      {NAV.map((g) => (
+        <div key={g.group} style={{ display: 'flex', flexDirection: 'column', gap: 1, marginBottom: 8 }}>
+          <span style={{ font: '500 10px/16px var(--font-ui)', color: '#8A7883', margin: '0 0 3px 10px' }}>{g.group}</span>
+          {g.items.map(([id, label]) => {
+            const on = route === id;
+            return (
+              <button key={id} onClick={() => go(id)} style={{
+                display: 'flex', alignItems: 'center', gap: 8, textAlign: 'left',
+                padding: '6px 10px', borderRadius: 8, border: 'none', cursor: 'pointer',
+                background: on ? 'rgba(166,42,84,0.18)' : 'transparent',
+                color: on ? '#E88BAB' : '#BCA9B4',
+                font: '400 13px/19px var(--font-ui)', letterSpacing: 0,
+              }}>
+                <span style={{
+                  width: 5, height: 5, flex: 'none', transform: 'rotate(45deg)',
+                  borderRadius: '50% 50% 50% 1.5px',
+                  background: on ? '#E88BAB' : 'rgba(255,255,255,0.12)',
+                }}></span>
+                {label}
+              </button>
+            );
+          })}
+        </div>
+      ))}
+      <span style={{ font: '400 10px/16px var(--font-ui)', color: '#5E4E58', marginTop: 'auto', flex: 'none', paddingTop: 12 }}>← → ეკრანების გადართვა</span>
+    </nav>
+  );
+}
+
+function App() {
+  const [t, setTweak] = useTweaks(TWEAK_DEFAULTS);
+  const saved = React.useMemo(() => {
+    try { return JSON.parse(localStorage.getItem(LS_KEY)) || {}; } catch (e) { return {}; }
+  }, []);
+  const [route, setRoute] = React.useState(FLAT.includes(saved.route) ? saved.route : 'splash');
+  const [carouselPage, setCarouselPage] = React.useState(0);
+  const [friend, setFriend] = React.useState(FRIENDS[saved.friend] ? FRIENDS[saved.friend] : FRIENDS[0]);
+  const [traitKey, setTraitKey] = React.useState(saved.trait || 'E');
+  const [shareFrom, setShareFrom] = React.useState('map');
+  const [introSeen, setIntroSeen] = React.useState(false);
+  const [scale, setScale] = React.useState(1);
+
+  React.useEffect(() => {
+    try { localStorage.setItem(LS_KEY, JSON.stringify({ route, trait: traitKey, friend: FRIENDS.indexOf(friend) })); } catch (e) {}
+  }, [route, traitKey, friend]);
+
+  React.useEffect(() => {
+    const fit = () => setScale(Math.min(1, (window.innerHeight - 48) / 844, (window.innerWidth - 216 - 64) / 390));
+    fit();
+    window.addEventListener('resize', fit);
+    return () => window.removeEventListener('resize', fit);
+  }, []);
+
+  React.useEffect(() => {
+    const onKey = (e) => {
+      if (e.target.tagName === 'INPUT' || e.target.tagName === 'TEXTAREA') return;
+      if (e.key !== 'ArrowRight' && e.key !== 'ArrowLeft') return;
+      const i = FLAT.indexOf(route);
+      setRoute(FLAT[(i + (e.key === 'ArrowRight' ? 1 : FLAT.length - 1)) % FLAT.length]);
+    };
+    window.addEventListener('keydown', onKey);
+    return () => window.removeEventListener('keydown', onKey);
+  }, [route]);
+
+  const go = (id) => { if (id === 'carousel') setCarouselPage(0); setRoute(id); };
+  const openShare = (from) => { setShareFrom(from); setRoute('share'); };
+
+  const body = () => {
+    switch (route) {
+      case 'splash': return <SplashScreen onDone={() => go('carousel')} />;
+      case 'carousel': return <CarouselScreen page={carouselPage} onPage={setCarouselPage} onDone={() => go('auth')} />;
+      case 'auth': return <AuthScreen onDone={() => go('name')} />;
+      case 'name': return <NameScreen onDone={() => go('birthday')} />;
+      case 'birthday': return <BirthdayScreen onDone={() => go('language')} />;
+      case 'language': return <LanguageScreen onDone={() => go('consent')} />;
+      case 'consent': return <ConsentScreen onDone={() => go('chapters')} />;
+      case 'chapters': return <ChapterHome onStart={() => go('q-likert')} onBack={() => go('map')} />;
+      case 'q-likert': return <AssessmentFlow key="q0" startAt={0} onDone={() => go('reveal')} onExit={() => go('chapters')} />;
+      case 'q-tt': return <AssessmentFlow key="q1" startAt={1} onDone={() => go('reveal')} onExit={() => go('chapters')} />;
+      case 'q-slider': return <AssessmentFlow key="q2" startAt={2} onDone={() => go('reveal')} onExit={() => go('chapters')} />;
+      case 'reveal': return <ChapterReveal onDone={() => go('map')} onShare={() => openShare('reveal')} />;
+      case 'map': return <MapScreen onArchetype={() => go('archetype')} onTrait={(k) => { setTraitKey(k); go('trait'); }} onPortrait={() => go('portrait')} onShare={() => openShare('map')} onChapters={() => go('chapters')} />;
+      case 'trait': return <TraitDetail trait={traitKey} onBack={() => go('map')} />;
+      case 'archetype': return <ArchetypeScreen onBack={() => go('map')} onShare={() => openShare('archetype')} />;
+      case 'portrait': return <FullPortrait onBack={() => go('map')} onShare={() => openShare('portrait')} />;
+      case 'share': return <ShareComposer onBack={() => go(shareFrom)} />;
+      case 'circle': return <CircleScreen onOpenPair={(f) => { setFriend(f); go('pair'); }} onGroup={() => go('group')} introSeen={introSeen} onIntroSeen={() => setIntroSeen(true)} />;
+      case 'pair': return <PairScreen friend={friend} onBack={() => go('circle')} onShare={() => openShare('pair')} />;
+      case 'group': return <GroupMapScreen onBack={() => go('circle')} />;
+      case 'today': return <TodayScreen />;
+      case 'me': return <MeScreen onSettings={() => go('settings')} />;
+      case 'settings': return <SettingsScreen onBack={() => go('me')} theme={t.theme} onTheme={(v) => setTweak('theme', v)} />;
+      default: return <TodayScreen />;
+    }
+  };
+
+  const activeTab = TAB_OF[route];
+  return (
+    <div style={{ display: 'flex', height: '100%' }}>
+      <Navigator route={route} go={go} />
+      <div style={{ flex: 1, display: 'flex', alignItems: 'center', justifyContent: 'center', minWidth: 0 }}>
+        <div style={{ width: 390 * scale, height: 844 * scale, flex: 'none' }}>
+          <div
+            data-theme={t.theme === 'light' ? 'light' : undefined}
+            className={t.motion === 'reduced' ? 'guli-reduced' : undefined}
+            style={{
+              width: 390, height: 844, transform: `scale(${scale})`, transformOrigin: 'top left',
+              background: 'var(--bg-0)', borderRadius: 40,
+              border: '1px solid rgba(255,255,255,0.12)', overflow: 'hidden',
+              display: 'flex', flexDirection: 'column', position: 'relative',
+              color: 'var(--text-primary)', font: '400 16px/25px var(--font-ui)',
+            }}
+          >
+            <div style={{ height: 44, flex: 'none', display: 'flex', alignItems: 'center', justifyContent: 'space-between', padding: '0 24px' }}>
+              <span className="type-caption type-numeral" style={{ color: 'var(--text-secondary)' }}>21:14</span>
+              <span className="type-caption" style={{ color: 'var(--text-muted)', letterSpacing: '0.02em' }}>GULI</span>
+            </div>
+            {body()}
+            {activeTab && <TabBar active={activeTab} onChange={(k) => go(k)} style={{ flex: 'none' }} />}
+          </div>
+        </div>
+      </div>
+      <TweaksPanel>
+        <TweakSection label="თემა" />
+        <TweakRadio label="Theme" value={t.theme} options={['dark', 'light']} onChange={(v) => setTweak('theme', v)} />
+        <TweakSection label="მოძრაობა" />
+        <TweakRadio label="Motion" value={t.motion} options={['full', 'reduced']} onChange={(v) => setTweak('motion', v)} />
+      </TweaksPanel>
+    </div>
+  );
+}
+ReactDOM.createRoot(document.getElementById('root')).render(<App />);
+</script>
+</body>
+</html>

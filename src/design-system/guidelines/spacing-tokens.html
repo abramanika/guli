@@ -1,0 +1,34 @@
+<!-- @dsCard group="Spacing" viewport="700x180" name="Layout tokens" subtitle="4pt grid · margin 20 · card padding 20 · gap 12" -->
+<!DOCTYPE html>
+<html lang="ka">
+<head><meta charset="UTF-8"><link rel="stylesheet" href="../styles.css">
+<style>
+body { margin: 0; padding: 16px; display: flex; gap: 12px; align-items: stretch; }
+.col { flex: 1; display: flex; flex-direction: column; gap: 8px; }
+.bar { background: var(--saperavi); border-radius: 3px; height: 12px; }
+.lbl { font: 400 10px/14px monospace; color: var(--text-muted); }
+.rad { background: var(--bg-2); border: 1px solid var(--line-hairline); display: flex; align-items: flex-end; padding: 8px; height: 64px; box-sizing: border-box; }
+</style></head>
+<body>
+<div class="col">
+  <span class="lbl">space: 4 / 8 / 12 / 16 / 20 / 24 / 32</span>
+  <div class="bar" style="width: 4px;"></div>
+  <div class="bar" style="width: 8px;"></div>
+  <div class="bar" style="width: 12px;"></div>
+  <div class="bar" style="width: 16px;"></div>
+  <div class="bar" style="width: 20px;"></div>
+  <div class="bar" style="width: 24px;"></div>
+  <div class="bar" style="width: 32px;"></div>
+</div>
+<div class="col">
+  <span class="lbl">radius: sm 10 · md 16 · lg 24 · pill</span>
+  <div style="display: flex; gap: 8px; flex: 1;">
+    <div class="rad" style="flex: 1; border-radius: 10px;"><span class="lbl">10</span></div>
+    <div class="rad" style="flex: 1; border-radius: 16px;"><span class="lbl">16</span></div>
+    <div class="rad" style="flex: 1; border-radius: 24px;"><span class="lbl">24</span></div>
+    <div class="rad" style="flex: 1; border-radius: 999px;"><span class="lbl">pill</span></div>
+  </div>
+  <span class="lbl">controls: lg 52 · md 44 · tabbar 56 · topbar 52</span>
+</div>
+</body>
+</html>

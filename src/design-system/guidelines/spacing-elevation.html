@@ -1,0 +1,17 @@
+<!-- @dsCard group="Spacing" viewport="700x170" name="Elevation — no shadows" subtitle="Surface step + hairline; glow only on active elements" -->
+<!DOCTYPE html>
+<html lang="ka">
+<head><meta charset="UTF-8"><link rel="stylesheet" href="../styles.css">
+<style>
+body { margin: 0; padding: 16px; display: flex; gap: 12px; }
+.card { flex: 1; border-radius: 16px; padding: 14px; display: flex; flex-direction: column; justify-content: flex-end; gap: 2px; height: 138px; box-sizing: border-box; }
+.card b { font: 500 12px/18px var(--font-ui); color: var(--text-primary); }
+.card span { font: 400 10px/15px var(--font-ui); color: var(--text-muted); }
+</style></head>
+<body>
+<div class="card" style="background: var(--bg-0); border: 1px solid var(--line-hairline);"><b>დონე 0</b><span>bg/0 + hairline</span></div>
+<div class="card" style="background: var(--bg-1); border: 1px solid var(--line-hairline);"><b>დონე 1</b><span>bg/1 · ბარათი</span></div>
+<div class="card" style="background: var(--bg-2); border: 1px solid var(--line-hairline);"><b>დონე 2</b><span>bg/2 · აწეული</span></div>
+<div class="card" style="background: var(--bg-1); border: 1px solid var(--trait-c); box-shadow: 0 0 24px rgba(53,196,181,0.12);"><b>აქტიური</b><span>trait hairline + 12% glow, 24px blur — არასდროს drop shadow</span></div>
+</body>
+</html>

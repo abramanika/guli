@@ -1,0 +1,18 @@
+<!-- @dsCard group="Colors" viewport="700x140" name="Semantic" subtitle="Success/warning/info borrow trait hues; error is its own" -->
+<!DOCTYPE html>
+<html lang="ka">
+<head><meta charset="UTF-8"><link rel="stylesheet" href="../styles.css">
+<style>
+body { margin: 0; padding: 16px; display: flex; gap: 12px; }
+.row { flex: 1; background: var(--bg-1); border: 1px solid var(--line-hairline); border-radius: 16px; padding: 14px; display: flex; flex-direction: column; gap: 8px; }
+.dot { width: 10px; height: 10px; border-radius: 999px; }
+.row span { font: 500 12px/18px var(--font-ui); color: var(--text-primary); }
+.row code { font: 400 10px/14px monospace; color: var(--text-muted); }
+</style></head>
+<body>
+<div class="row"><span class="dot" style="background: var(--success);"></span><span>წარმატება</span><code>success = trait/C</code></div>
+<div class="row"><span class="dot" style="background: var(--warning);"></span><span>გაფრთხილება</span><code>warning = trait/E</code></div>
+<div class="row"><span class="dot" style="background: var(--error);"></span><span>შეცდომა</span><code>error #FF5470</code></div>
+<div class="row"><span class="dot" style="background: var(--info);"></span><span>ინფო</span><code>info = trait/O</code></div>
+</body>
+</html>
