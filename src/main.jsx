@@ -5,6 +5,7 @@ import './design-system/tokens/colors.css'
 import './design-system/tokens/typography.css'
 import './design-system/tokens/spacing.css'
 import './design-system/styles.css'
+import './styles/transitions.css'
 import './index.css'
 import App from './App.jsx'
 

@@ -1,4 +1,5 @@
 import React from 'react';
+import PageTransition from '../../components/PageTransition.jsx';
 import { useNavigate, useParams } from 'react-router-dom';
 import {
   Button, Icon, ProgressDrops, TRAITS,
@@ -14,6 +15,7 @@ export default function ChapterHomePage() {
   const currentIndex = chapters.findIndex((c) => c.state === 'current');
 
   return (
+    <PageTransition>
     <div style={{
       display: 'flex',
       flexDirection: 'column',
@@ -68,6 +70,7 @@ export default function ChapterHomePage() {
             return (
               <div
                 key={c.n}
+                className={current ? 'pressable' : undefined}
                 onClick={current ? () => navigate(`/assessment/${c.n}/questions`) : undefined}
                 style={{
                   display: 'flex',
@@ -121,5 +124,6 @@ export default function ChapterHomePage() {
         </span>
       </div>
     </div>
+    </PageTransition>
   );
 }

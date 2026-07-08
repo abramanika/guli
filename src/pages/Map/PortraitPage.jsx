@@ -1,4 +1,5 @@
 import React from 'react';
+import PageTransition from '../../components/PageTransition.jsx';
 import { useNavigate } from 'react-router-dom';
 import { Button, Icon, ColorForm, Skeleton } from '../../design-system/index.js';
 import { usePortrait } from '../../hooks/usePortrait.js';
@@ -20,6 +21,7 @@ export default function PortraitPage() {
   })();
 
   return (
+    <PageTransition>
     <div style={{ display: 'flex', flexDirection: 'column', height: '100%', background: 'var(--bg-0)' }}>
       {/* Top bar */}
       <div style={{
@@ -99,5 +101,6 @@ export default function PortraitPage() {
         </Button>
       </div>
     </div>
+    </PageTransition>
   );
 }

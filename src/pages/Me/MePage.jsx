@@ -1,4 +1,5 @@
 import React, { useEffect, useState } from 'react';
+import PageTransition from '../../components/PageTransition.jsx';
 import { useNavigate } from 'react-router-dom';
 import { Button, Icon, Chip, ColorForm, BottomSheet, Toast, TRAITS } from '../../design-system/index.js';
 import useResultsStore, { FALLBACK } from '../../stores/resultsStore.js';
@@ -118,6 +119,7 @@ export default function MePage() {
   }
 
   return (
+    <PageTransition>
     <div style={{ display: 'flex', flexDirection: 'column', height: '100%', background: 'var(--bg-0)' }}>
       {/* Top bar */}
       <div style={{
@@ -257,5 +259,6 @@ export default function MePage() {
         </Toast>
       )}
     </div>
+    </PageTransition>
   );
 }

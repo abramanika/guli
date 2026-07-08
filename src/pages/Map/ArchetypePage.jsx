@@ -1,4 +1,5 @@
 import React from 'react';
+import PageTransition from '../../components/PageTransition.jsx';
 import { useNavigate } from 'react-router-dom';
 import { Button, Icon, ArchetypeCard } from '../../design-system/index.js';
 import useResultsStore, { FALLBACK } from '../../stores/resultsStore.js';
@@ -18,6 +19,7 @@ export default function ArchetypePage() {
   })();
 
   return (
+    <PageTransition>
     <div style={{
       display: 'flex', flexDirection: 'column',
       height: '100%', padding: 20, gap: 16,
@@ -45,5 +47,6 @@ export default function ArchetypePage() {
         გაზიარება
       </Button>
     </div>
+    </PageTransition>
   );
 }

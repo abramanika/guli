@@ -31,6 +31,10 @@ import ChapterHomePage from './pages/Assessment/ChapterHomePage.jsx';
 import QuestionFlowPage from './pages/Assessment/QuestionFlowPage.jsx';
 import RevealPage from './pages/Assessment/RevealPage.jsx';
 
+// Legal pages (no tab bar)
+import TermsPage from './pages/Legal/TermsPage.jsx';
+import PrivacyPage from './pages/Legal/PrivacyPage.jsx';
+
 const router = createBrowserRouter([
   // Onboarding flow — no tab bar
   {
@@ -53,6 +57,15 @@ const router = createBrowserRouter([
       { path: '/assessment/:chapterId', element: <ChapterHomePage /> },
       { path: '/assessment/:chapterId/questions', element: <QuestionFlowPage /> },
       { path: '/assessment/:chapterId/reveal', element: <RevealPage /> },
+    ],
+  },
+
+  // Legal pages — no tab bar
+  {
+    element: <OnboardingShell />,
+    children: [
+      { path: '/terms', element: <TermsPage /> },
+      { path: '/privacy', element: <PrivacyPage /> },
     ],
   },
 
