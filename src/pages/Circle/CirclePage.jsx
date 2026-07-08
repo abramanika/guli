@@ -1,4 +1,5 @@
 import { useState, useEffect } from 'react';
+import PageTransition from '../../components/PageTransition.jsx';
 import { useNavigate } from 'react-router-dom';
 import {
   ColorForm, Icon, Button, BottomSheet, Toast,
@@ -89,6 +90,7 @@ export default function CirclePage() {
   const group = groups[0] ?? null;
 
   return (
+    <PageTransition>
     <div style={{ display: 'flex', flexDirection: 'column', height: '100%', background: 'var(--bg-0)' }}>
       {/* Top bar */}
       <div style={{
@@ -142,6 +144,7 @@ export default function CirclePage() {
         {!loading && friends.map((f) => (
           <div
             key={f.id}
+            className="pressable"
             onClick={() => navigate(`/circle/pair/${f.id}`)}
             style={{
               display: 'flex', alignItems: 'center', gap: 12,
@@ -168,6 +171,7 @@ export default function CirclePage() {
         {/* Group row */}
         {!loading && group && (
           <div
+            className="pressable"
             onClick={() => navigate(`/circle/group/${group.id}`)}
             style={{
               display: 'flex', alignItems: 'center', gap: 12,
@@ -309,5 +313,6 @@ export default function CirclePage() {
         )}
       </BottomSheet>
     </div>
+    </PageTransition>
   );
 }

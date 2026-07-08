@@ -1,4 +1,5 @@
 import React, { useEffect, useState, useMemo } from 'react';
+import PageTransition from '../../components/PageTransition.jsx';
 import { useNavigate } from 'react-router-dom';
 import {
   DailyQuestionCard,
@@ -95,6 +96,7 @@ export default function TodayPage() {
   }
 
   return (
+    <PageTransition>
     <div style={{ display: 'flex', flexDirection: 'column', height: '100%', background: 'var(--bg-0)' }}>
       {/* Top bar */}
       <div style={{
@@ -171,5 +173,6 @@ export default function TodayPage() {
         </div>
       </div>
     </div>
+    </PageTransition>
   );
 }

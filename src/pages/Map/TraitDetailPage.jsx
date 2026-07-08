@@ -1,4 +1,5 @@
 import React from 'react';
+import PageTransition from '../../components/PageTransition.jsx';
 import { useNavigate, useParams } from 'react-router-dom';
 import {
   Icon, TraitBar, InsightCard, TRAITS,
@@ -22,6 +23,7 @@ export default function TraitDetailPage() {
   const value = displayScores[trait] ?? 50;
 
   return (
+    <PageTransition>
     <div style={{ display: 'flex', flexDirection: 'column', height: '100%', background: 'var(--bg-0)' }}>
       {/* Gradient header */}
       <div style={{
@@ -96,5 +98,6 @@ export default function TraitDetailPage() {
         </span>
       </div>
     </div>
+    </PageTransition>
   );
 }

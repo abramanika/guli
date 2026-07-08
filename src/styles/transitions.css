@@ -1,0 +1,45 @@
+/* Page transition animations */
+@keyframes guli-page-enter {
+  from { opacity: 0; transform: translateY(8px); }
+  to { opacity: 1; transform: translateY(0); }
+}
+
+@keyframes guli-page-exit {
+  from { opacity: 1; }
+  to { opacity: 0; }
+}
+
+.page-enter {
+  animation: guli-page-enter var(--duration-transition) var(--ease-standard) both;
+}
+
+/* Card press state */
+.pressable {
+  transition: transform 120ms var(--ease-standard);
+  cursor: pointer;
+}
+.pressable:active {
+  transform: scale(0.98);
+}
+
+/* Reduced motion */
+@media (prefers-reduced-motion: reduce) {
+  .page-enter {
+    animation-duration: 300ms;
+    animation-name: guli-fade-in;
+  }
+  .pressable:active {
+    transform: none;
+  }
+}
+
+@keyframes guli-fade-in {
+  from { opacity: 0; }
+  to { opacity: 1; }
+}
+
+/* Skeleton shimmer */
+@keyframes guli-shimmer {
+  0% { background-position: -200% 0; }
+  100% { background-position: 200% 0; }
+}

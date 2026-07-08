@@ -1,4 +1,5 @@
 import React, { useEffect } from 'react';
+import PageTransition from '../../components/PageTransition.jsx';
 import { useNavigate } from 'react-router-dom';
 import {
   Button, Icon, ColorForm, HeartMap, TraitBar, ArchetypeCard,
@@ -35,6 +36,7 @@ export default function MapPage() {
   const remainingChapters = 5;
 
   return (
+    <PageTransition>
     <div style={{ display: 'flex', flexDirection: 'column', height: '100%', background: 'var(--bg-0)' }}>
       {/* Top bar */}
       <div style={{
@@ -81,6 +83,7 @@ export default function MapPage() {
           {['E', 'A', 'C', 'N', 'O'].map((k) => (
             <div
               key={k}
+              className="pressable"
               onClick={() => navigate(`/map/trait/${k}`)}
               style={{ cursor: 'pointer' }}
             >
@@ -90,7 +93,7 @@ export default function MapPage() {
         </div>
 
         {/* Archetype card (compact, clickable) */}
-        <div onClick={() => navigate('/map/archetype')} style={{ cursor: 'pointer' }}>
+        <div className="pressable" onClick={() => navigate('/map/archetype')} style={{ cursor: 'pointer' }}>
           <ArchetypeCard
             compact
             name={displayArchetype.name}
@@ -102,6 +105,7 @@ export default function MapPage() {
 
         {/* Full portrait row */}
         <div
+          className="pressable"
           onClick={() => navigate('/map/portrait')}
           style={{
             display: 'flex', alignItems: 'center', justifyContent: 'space-between',
@@ -117,6 +121,7 @@ export default function MapPage() {
 
         {/* Chapters CTA */}
         <div
+          className="pressable"
           onClick={() => navigate('/assessment/1')}
           style={{
             display: 'flex', alignItems: 'center', gap: 12,
@@ -142,5 +147,6 @@ export default function MapPage() {
         </span>
       </div>
     </div>
+    </PageTransition>
   );
 }

@@ -1,4 +1,5 @@
 import React, { useState, useEffect } from 'react';
+import PageTransition from '../../components/PageTransition.jsx';
 import { useNavigate, useParams } from 'react-router-dom';
 import { Button, TraitBar, TRAITS } from '../../design-system/index.js';
 import useAssessmentStore from '../../stores/assessmentStore.js';
@@ -23,6 +24,7 @@ export default function RevealPage() {
   const traitText = getTraitText(trait);
 
   return (
+    <PageTransition>
     <div style={{
       display: 'flex',
       flexDirection: 'column',
@@ -94,5 +96,6 @@ export default function RevealPage() {
         </Button>
       </div>
     </div>
+    </PageTransition>
   );
 }
