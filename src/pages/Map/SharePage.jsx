@@ -1,7 +1,8 @@
-import React, { useState } from 'react';
+import React, { useState, useRef } from 'react';
 import { useNavigate } from 'react-router-dom';
 import { Button, Icon, ColorForm, Chip, Toast, TRAITS } from '../../design-system/index.js';
 import useResultsStore, { FALLBACK } from '../../stores/resultsStore.js';
+import { captureElement, shareOrDownload } from '../../lib/shareImage.js';
 
 const SHARE_FORMATS = ['Story', 'კვადრატი', 'სტიკერი'];
 
@@ -123,11 +124,15 @@ export default function SharePage() {
   const navigate = useNavigate();
   const { scores, archetype, traits } = useResultsStore();
 
+  const previewRef = useRef(null);
+
   const [format, setFormat] = useState(0);
   const [showArchetype, setShowArchetype] = useState(true);
   const [showTraits, setShowTraits] = useState(true);
   const [lang, setLang] = useState('ka');
   const [sent, setSent] = useState(false);
+  const [toastMsg, setToastMsg] = useState('');
+  const [loading, setLoading] = useState(false);
 
   const displayArchetype = archetype ?? FALLBACK.archetype;
   const displayTraits = traits ?? FALLBACK.traits;
@@ -138,9 +143,20 @@ export default function SharePage() {
     return [sorted[0][0], sorted[1][0]];
   })();
 
-  function handleShare() {
-    setSent(true);
-    setTimeout(() => setSent(false), 2400);
+  async function handleShare() {
+    if (!previewRef.current || loading) return;
+    setLoading(true);
+    try {
+      const blob = await captureElement(previewRef.current);
+      const result = await shareOrDownload(blob, 'guli-share.png');
+      setToastMsg(result === 'shared' ? 'გაზიარებულია' : 'ბარათი შეინახა');
+      setSent(true);
+      setTimeout(() => setSent(false), 2400);
+    } catch (err) {
+      console.error('Share failed:', err);
+    } finally {
+      setLoading(false);
+    }
   }
 
   return (
@@ -187,14 +203,16 @@ export default function SharePage() {
         </div>
 
         {/* Live preview card */}
-        <ShareCardPreview
-          format={format}
-          showArchetype={showArchetype}
-          showTraits={showTraits}
-          traits={topTraits}
-          archetype={displayArchetype}
-          chips={displayArchetype.chips}
-        />
+        <div ref={previewRef} style={{ display: 'inline-block', margin: '0 auto' }}>
+          <ShareCardPreview
+            format={format}
+            showArchetype={showArchetype}
+            showTraits={showTraits}
+            traits={topTraits}
+            archetype={displayArchetype}
+            chips={displayArchetype.chips}
+          />
+        </div>
 
         {/* Toggle chips */}
         <div style={{ display: 'flex', gap: 8, justifyContent: 'center', flexWrap: 'wrap' }}>
@@ -213,7 +231,7 @@ export default function SharePage() {
         <div style={{ flex: 1 }} />
 
         {/* Share button */}
-        <Button variant="primary" onClick={handleShare}>
+        <Button variant="primary" onClick={handleShare} loading={loading}>
           გაზიარება
         </Button>
       </div>
@@ -221,7 +239,7 @@ export default function SharePage() {
       {/* Toast notification */}
       {sent && (
         <Toast floating icon={<Icon name="check" size={14} color="var(--trait-c)" />}>
-          ბარათი მზადაა — Stories გაიხსნება
+          {toastMsg}
         </Toast>
       )}
     </div>
