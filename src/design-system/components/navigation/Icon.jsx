@@ -1,27 +1,31 @@
-import React, { useEffect, useState } from 'react';
-
-const CACHE = {};
+import React, { createElement } from 'react';
+import { icons } from 'lucide-react';
 
 /**
- * Icon — inlines a Lucide SVG (stroke ~1.75, rounded joins — matches Guli's
- * icon spec) recolored via currentColor. SUBSTITUTE for the future custom set.
+ * Converts a kebab-case icon name (e.g. "circle-user") to PascalCase ("CircleUser")
+ * to match lucide-react's named exports.
+ */
+function toPascalCase(name) {
+  return name
+    .split('-')
+    .map((seg) => seg.charAt(0).toUpperCase() + seg.slice(1))
+    .join('');
+}
+
+/**
+ * Icon — renders a Lucide icon by name using lucide-react, with strokeWidth 1.75
+ * to match Guli's icon spec (rounded joins, slightly lighter than default).
+ * Accepts kebab-case icon names (same convention as Lucide's file names).
+ * Replaces the previous fetch-from-CDN approach.
  */
 export function Icon({ name = 'droplet', size = 24, color = 'currentColor', style }) {
-  const [svg, setSvg] = useState(CACHE[name] || null);
-  useEffect(() => {
-    let live = true;
-    if (CACHE[name]) { setSvg(CACHE[name]); return; }
-    fetch(`https://unpkg.com/lucide-static@0.462.0/icons/${name}.svg`)
-      .then((r) => (r.ok ? r.text() : Promise.reject(r.status)))
-      .then((t) => { CACHE[name] = t; if (live) setSvg(t); })
-      .catch(() => {});
-    return () => { live = false; };
-  }, [name]);
+  const IconComponent = icons[toPascalCase(name)] ?? icons['Droplet'];
   return (
     <span
       aria-hidden="true"
       style={{ width: size, height: size, display: 'inline-flex', color, flex: 'none', ...style }}
-      dangerouslySetInnerHTML={svg ? { __html: svg.replace('width="24"', `width="${size}"`).replace('height="24"', `height="${size}"`).replace('stroke-width="2"', 'stroke-width="1.75"') } : undefined}
-    ></span>
+    >
+      {createElement(IconComponent, { size, strokeWidth: 1.75, color })}
+    </span>
   );
 }
